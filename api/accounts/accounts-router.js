@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const dbConfig = require("../../data/db-config");
 const md = require("./accounts-middleware");
 const Account = require("./accounts-model");
 
@@ -44,7 +45,14 @@ router.put(
   }
 );
 
-router.delete("/:id", md.checkAccountId, (req, res, next) => {});
+router.delete("/:id", md.checkAccountId, async (req, res, next) => {
+  try {
+    await Account.deleteById(req.params.id);
+    res.json(req.account);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.use((err, req, res, next) => {
   // eslint-disable-line

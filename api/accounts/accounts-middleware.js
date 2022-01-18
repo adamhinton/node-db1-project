@@ -29,7 +29,6 @@ exports.checkAccountPayload = (req, res, next) => {
 };
 
 exports.checkAccountNameUnique = async (req, res, next) => {
-  console.log("jfiasofsji");
   try {
     const existing = await db("accounts")
       .where("name", req.body.name.trim())
@@ -39,7 +38,6 @@ exports.checkAccountNameUnique = async (req, res, next) => {
       console.log("existing");
       next({ status: 400, message: "that name is taken" });
     } else {
-      console.log("not existing");
       next();
     }
   } catch (err) {

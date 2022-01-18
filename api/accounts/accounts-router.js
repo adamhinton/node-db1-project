@@ -21,12 +21,14 @@ router.post(
   "/",
   md.checkAccountPayload,
   md.checkAccountNameUnique,
-  (req, res, next) => {
-    console.log("post account");
-
-    // DO YOUR MAGIC
+  async (req, res, next) => {
     try {
+      console.log("creating, hmm");
+      const newAccount = await Account.create(req.body);
+      console.log(newAccount);
+      res.status(201).json(newAccount);
     } catch (err) {
+      console.log("error blah");
       next(err);
     }
   }
@@ -42,9 +44,7 @@ router.put(
   }
 );
 
-router.delete("/:id", md.checkAccountId, (req, res, next) => {
-  // DO YOUR MAGIC
-});
+router.delete("/:id", md.checkAccountId, (req, res, next) => {});
 
 router.use((err, req, res, next) => {
   // eslint-disable-line

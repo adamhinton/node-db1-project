@@ -22,6 +22,8 @@ router.post(
   md.checkAccountPayload,
   md.checkAccountNameUnique,
   (req, res, next) => {
+    console.log("post account");
+
     // DO YOUR MAGIC
     try {
     } catch (err) {
